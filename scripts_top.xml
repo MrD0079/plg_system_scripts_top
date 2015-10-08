@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.7" type="plugin" group="system" method="upgrade">
+    <name>Scripts top</name>
+    <author>Dmitry Sakharuk</author>
+    <creationDate>August 2015</creationDate>
+    <copyright>Public Source</copyright>
+    <authorEmail>saharin@outlook.com</authorEmail>
+    <authorUrl>molutva.net</authorUrl>
+    <version>0.4</version>
+    <description>scripts firs load</description>
+    <files>
+        <filename plugin="scripts_top">scripts_top.php</filename>
+        <filename>index.html</filename>
+    </files>
+
+    <!-- Parameters -->
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="scripts" type="textarea" label="First including" default="/media/jui/js/jquery.min.js&#13;&#10;/media/jui/js/jquery-noconflict.js&#13;&#10;/media/jui/js/jquery-migrate.min.js" filter="raw" cols="60" rows="10"/>
+                <field name="exclude" type="textarea" label="Scripts exclude" default="" filter="raw" cols="60" rows="10"/>
+            </fieldset>
+        </fields>
+    </config>
+
+</extension>
