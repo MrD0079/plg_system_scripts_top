@@ -20,48 +20,35 @@ class plgSystemScripts_top extends JPlugin
 
             $a_scripts = $this->getScripts('scripts');
 
-            if(count($exclude) > 0 && count($a_scripts) > 0){
-                foreach ($exclude as $ve) {
-                    if(isset($a_scripts[$ve])) unset($a_scripts[$ve]);
-                }
-            }
+            $document = JFactory::getDocument();
 
-            if(count($exclude) > 0 || count($a_scripts) > 0) {
+            $scripts = $document->_scripts;
 
+            $new = array();
 
-                $document = JFactory::getDocument();
-                $scripts = $document->_scripts;
-
-                $new = array();
-
-                foreach ($scripts as $k => $v) {
-
-                    if (in_array($k, $exclude)) {
-                        unset($scripts[$k]);
-                    }
-
-                    if (in_array($k, $a_scripts)) {
+            foreach ($scripts as $k => $v) {
+                if(!isset($new[$k])) {
+                    if (!in_array($k, $exclude)) {
                         $new[$k] = $v;
-                        unset($scripts[$k]);
-                    }
-
-                }
-
-
-                $impa = array();
-                foreach ($a_scripts as $val) {
-                    if (!empty($new) && isset($new[$val])) {
-                        $impa[$val] = $new[$val];
-                    } else {
-                        $impa[$val] = array("mime"=>"text/javascript","defer"=>false,"async"=>false);
                     }
                 }
-                $scripts = $impa + $scripts;
-
-
-                $document->_scripts = $scripts;
-
             }
+
+            if(count($a_scripts) > 0 ) {
+                $first_include = array();
+                foreach ($a_scripts as $val) {
+                    if (isset($new[$val])) {
+                        $first_include[$val] = $new[$val];
+                    } else {
+                        $first_include[$val] = array("mime" => "text/javascript", "defer" => false, "async" => false);
+                    }
+                }
+                $new = $first_include + $new;
+            }
+
+            $scripts = $new;
+
+            $document->_scripts = $scripts;
         }
 
         return true;

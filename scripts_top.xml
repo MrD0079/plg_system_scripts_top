@@ -6,7 +6,7 @@
     <copyright>Public Source</copyright>
     <authorEmail>saharin@outlook.com</authorEmail>
     <authorUrl>molutva.net</authorUrl>
-    <version>0.4</version>
+    <version>0.5</version>
     <description>scripts firs load</description>
     <files>
         <filename plugin="scripts_top">scripts_top.php</filename>
